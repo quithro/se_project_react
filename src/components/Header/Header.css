@@ -1,0 +1,33 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    font-weight: bold;
+    font-size: 20px;
+    min-height: 60px;
+}
+
+.header__logo {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.header__button {
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.header__button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.header__avatar-logo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}

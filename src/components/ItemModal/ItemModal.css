@@ -1,0 +1,24 @@
+.modal__close-item {
+    position: relative;
+    top: -5px;
+    left: 460px;
+    background-image: url("../../images/close-button.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    border-radius: 5px;
+    background-color: gray;
+    border: none;
+    height: 40px;
+    width: 40px;
+}
+
+.modal__close-item:hover {
+    cursor: pointer;
+}
+
+.modal__content-item {
+    background-color: #fff;
+    max-width: 496px;
+    border-radius: 20px;
+    padding: 20px 30px 30px 30px;
+}

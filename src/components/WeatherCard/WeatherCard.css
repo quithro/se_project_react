@@ -1,0 +1,19 @@
+.weather {
+    display: flex;
+    right: 10px;
+    padding: 0px;
+    align-items: center;
+    min-height: 80px;
+}
+
+.weather__info {
+    position: absolute;
+    font-size: 36px;
+    left: 35px;
+    color: #fff;
+}
+
+.weather__image {
+    width: 100%;
+    min-width: 950px;
+}
