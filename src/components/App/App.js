@@ -1,11 +1,15 @@
+import React, { useState, useEffect, Profiler } from 'react';
+import api from "../../utils/api";
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
-import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import { useEffect, useState } from 'react';
+import Profile from "../Profile/Profile";
 import ItemModal from '../ItemModal/ItemModal';
+import AddItemModal from '../AddItemModal/AddItemModal';
 import { parseWeatherData, getForecastWeather } from '../../utils/weatherApi';
-import './App.css';
+import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext';
+import { Switch, Route } from "react-router-dom/cjs/react-router-dom";
 
 function App() {
   const weatherTemp = "70°F";
@@ -38,79 +42,58 @@ function App() {
   }, []);
   console.log(temp);
 
+  const handleRemoveCard = (cardToRemove) => {
+    api
+      .deleteItem(cardToRemove._id)
+      .then(() => {
+        setCards(cards.filter((card) => card !== cardToRemove));
+        console.log("Card removed successfuly from server.");
+      })
+      .catch((error) => {
+        console.error("Error removing card from server:", error);
+      });
+  };
+
   return (
     <div>
-      <Header onCreateModal={handleCreateModal} />
-      <Main weatherTemp={temp} onSelectCard={handleSelectedCard} />
-      <Footer />
-      {activeModal === "create" && (
-        <ModalWithForm title="New Clothing" onClose={handleCloseModal}>
-          <label className="modal__label">
-            Name
-            <input
-              className="modal__input"
-              type="text"
-              name="name"
-              minLength="1"
-              maxLength="30"
-              placeholder="Name"
+      <CurrentTemperatureUnitContext.Provider
+      value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+      >
+        <Header onCreateModal={handleCreateModal} />
+        <Switch>
+          <Route exact path="/">
+            <Main 
+              weatherTemp={temp}
+              onSelectCard={handleSelectedCard}
+              cards={cards}
+              onRemoveCard={handleRemoveCard}
             />
-          </label>
-          <label className="modal__label">
-            Image
-            <input
-              className="modal__input"
-              type="url"
-              name="link"
-              minLength="1"
-              maxLength="220"
-              placeholder="Image Url"
-              />
-          </label>
-          <div className="modal__weather">
-            <p>Select Weather Type:</p>
-            <div className="modal__weather-input">
-              <input
-                className="modal__weather-radio"
-                type="radio"
-                id="hot"
-                value="hot"
-                name="weatherType"
-              />
-              <label className="modal__weather-label" htmlFor="hot">
-                Hot
-              </label>
-            </div>
-            <div className="modal__weather-input">
-              <input
-                className="modal__weather-radio"
-                type="radio"
-                id="warm"
-                value="warm"
-                name="weatherType"
-              />
-              <label className="modal__weather-label" htmlFor="warm">
-                Warm
-              </label>
-            </div>
-            <div className="modal__weather-input">
-              <input
-                className="modal__weather-radio"
-                type="radio"
-                id="cold"
-                value="cold"
-                name="weatherType"
-              />
-              <label className="modal__weather-label" htmlFor="cold">
-                Cold
-              </label>
-            </div>
-          </div>
-        </ModalWithForm>
-      )}
-      {activeModal === "preview" && (
-        <ItemModal selectedCard={selectedCard} onClose={handleCloseModal} />
-      )}
+          </Route>
+          <Route path="/profile">
+            <Profile
+              onCreateModal={handleCreateModal}
+              cards={cards}
+              onSelectCard={handleSelectedCard}
+              onAddItem={onAddItem}
+            />
+          </Route>
+        </Switch>
+        <Footer />
+        {activeModal === "create" && (
+          <AddItemModal
+            handleCloseModal={handleCloseModal}
+            isOpen={activeModal === "create"}
+            handleCreateModal={handleCreateModal}
+            handleAddItemSubmit={handleAddItemSubmit}
+          />
+        )}
+        {activeModal === "preview" && (
+          <ItemModal 
+            selectedCard={selectedCard}
+            onClose={handleCloseModal}
+            onDelete={handleRemoveCard} />
+        )}
+      </CurrentTemperatureUnitContext.Provider>  
     </div>
   );
 }

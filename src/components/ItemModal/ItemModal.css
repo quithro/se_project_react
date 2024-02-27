@@ -22,3 +22,23 @@
     border-radius: 20px;
     padding: 20px 30px 30px 30px;
 }
+
+.modal__image {
+    width: 498px;
+    height: 500px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+.modal__caption {
+    font-family: "Cabinet Grotesk", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    background: #ffffff;
+    color: #000000;
+    padding: 30px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
