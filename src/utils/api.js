@@ -7,9 +7,6 @@ const api ={
     getItems: () => {
         return fetch(`${baseUrl}/items`)
         .then(processServerResponse)
-        .catch((error) => {
-            console.error("Error fetching items:", error);
-        });
     },
 
     addItem: (name, imageUrl, weather) => {
@@ -26,24 +23,18 @@ const api ={
             }
             return response.json();
         })
-        .catch((error) => {
-            console.error("Error adding item:", error);
-        });
     },
 
     deleteItem: (id) => {
         return fetch(`${baseUrl}/items/${id}`, {
             method: "DELETE",
         })
-        .then((reponse) => {
-            if (!response.ok) {
+        .then((processServerResponse) => {
+            if (!processServerResponse.ok) {
                 throw new Error("Failed to delete item");
             }
             console.log("Item deleted successfully");
         })
-        .catch((error) => {
-            console.error("Error deleting item:", error);
-        });
     },
 };
 

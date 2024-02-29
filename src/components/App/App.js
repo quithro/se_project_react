@@ -1,9 +1,8 @@
-import React, { useState, useEffect, Profiler } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from "../../utils/api";
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
-import { useEffect, useState } from 'react';
 import Profile from "../Profile/Profile";
 import ItemModal from '../ItemModal/ItemModal';
 import AddItemModal from '../AddItemModal/AddItemModal';
@@ -40,7 +39,6 @@ function App() {
       console.error("Error fetching forecast weather:", error);
     });
   }, []);
-  console.log(temp);
 
   const handleRemoveCard = (cardToRemove) => {
     api
@@ -84,7 +82,6 @@ function App() {
             handleCloseModal={handleCloseModal}
             isOpen={activeModal === "create"}
             handleCreateModal={handleCreateModal}
-            handleAddItemSubmit={handleAddItemSubmit}
           />
         )}
         {activeModal === "preview" && (

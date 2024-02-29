@@ -17,7 +17,9 @@ const WeatherCard = ({ day, type, weatherTemp = "" }) => {
                 <img className="weather__image" src={weatherOptionUrl} alt="weather image" />
             </section>
         );
-    };
+    } else {
+        return null;
+    }
 }
 
 export default WeatherCard;

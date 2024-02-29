@@ -1,6 +1,6 @@
 import "./Profile.css";
 import ClothesSection from "../ClothesSection/ClothesSection";
-import SideBar from "../SideBar/SideBar";
+import SideBar from "../SideBar";
 
 const Profile = ({ onSelectCard, handleCreateModal, clothingItems }) => {
     return (
