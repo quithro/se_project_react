@@ -1,18 +1,25 @@
+import React from "react";
 import "./Profile.css";
 import ClothesSection from "../ClothesSection/ClothesSection";
-import SideBar from "../SideBar";
+import SideBar from "../Profile/Profile";
 
-const Profile = ({ onSelectCard, handleCreateModal, clothingItems }) => {
+const Profile = ({ onCreateModal, cards, onSelectCard, onAddItem }) => {
     return (
-        <div className="profile">
-            <SideBar />
-            <ClothesSection
-                clothingItems={clothingItems}
-                onSelectCard={onSelectCard}
-                handleCreateModal={handleCreateModal}
-            />
+      <div className="profile__content">
+        <SideBar />
+        <div className="profile__items">
+          <h3 className="profile__items-your">Your Items</h3>
+          <button
+            className="profile_profile__button"
+            type="text"
+            onClick={onCreateModal}
+          >
+            + Add New
+          </button>
         </div>
+        <ClothesSection items={cards} onSelectCard={onSelectCard} />
+      </div>
     );
-};
+  };
 
 export default Profile;

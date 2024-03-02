@@ -18,3 +18,10 @@
 .card__image:hover {
     cursor: pointer;
 }
+
+.card__container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+}

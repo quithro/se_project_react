@@ -31,6 +31,10 @@
   padding-top: 12px;
 }
 
+.modal__button {
+  margin-right: 5px;
+}
+
 .modal__label {
   font-family: "Cabinet Grotesk", Arial, sans-serif;
   font-weight: 700;

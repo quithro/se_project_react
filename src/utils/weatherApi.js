@@ -11,13 +11,24 @@ const APIkey = "b695b456fd83b55a17c5827f6430eeed";
 export const getForecastWeather = () => {
     const weatherApi = fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}`
-    ).then(processServerResponse);
+    )
+        .then(processServerResponse)
+        .catch((error) => {
+            console.error("Error fetching weather data:", error);
+        });
     return weatherApi;
 };
-
+  
 export const parseWeatherData = (data) => {
     const main = data.main;
     const temperature = main && main.temp;
-    console.log(Math.ceil(temperature));
-    return Math.ceil(temperature);
+  
+    const weather = {
+        temperature: {
+            F: `${Math.round(temperature)}°F`,
+            C: `${Math.round(((temperature - 32) * 5) / 9)}°C`,
+        },
+    };
+    console.log(weather);
+    return weather;
 };
