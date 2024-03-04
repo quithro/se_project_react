@@ -1,11 +1,12 @@
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
+import { useMemo, useContext } from "react";
 import "./Main.css";
-import React, { useContext } from "react";
-import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
-function Main({ weatherTemp, onSelectCard, cards }) {
+function Main({ weatherTemp, onSelectCard, clothingItems }) {
     const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
+    
     const currentTemp = weatherTemp?.temp?.[currentTemperatureUnit];
     
     const getWeatherType = () => {
@@ -17,12 +18,11 @@ function Main({ weatherTemp, onSelectCard, cards }) {
           return "cold";
         }
       };
-
-    const filteredCards = cards.filter((item) => {
-        return item?.weather.toLowerCase() === weatherType;
-    });
-
+    
     const weatherType = getWeatherType();
+    const filteredCards = clothingItems.filter((card) => {
+        return card?.weather.toLowerCase() === weatherType;
+    });    
 
     return (
         <main className="main">
@@ -32,21 +32,19 @@ function Main({ weatherTemp, onSelectCard, cards }) {
                 weatherTemp={weatherTemp} 
                 currentTemp={currentTemp}
             />
-            <section 
-                className="card__section" 
-                id="card-section">
+            <section className="card__section" id="card-section">
                     Today is {`${currentTemp}°${currentTemperatureUnit}`} / You may want to wear:
-                <div className="card__items">
+                <ul className="card__items">
                     {filteredCards.map((item) => {
                         return (
                             <ItemCard 
-                                key={item._id} 
                                 item={item} 
+                                key={item._id} 
                                 onSelectCard={onSelectCard} 
                             />
                         );    
                     })}
-                </div>
+                </ul>
             </section>
         </main>
     );

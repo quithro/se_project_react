@@ -8,7 +8,7 @@ const latitude = 36.993686171254716;
 const longitude = -86.4412161845565;
 const APIkey = "b695b456fd83b55a17c5827f6430eeed";
 
-export const getForecastWeather = () => {
+export const getWeatherForecast = () => {
     const weatherApi = fetch(
         `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}`
     )
@@ -21,12 +21,12 @@ export const getForecastWeather = () => {
   
 export const parseWeatherData = (data) => {
     const main = data.main;
-    const temperature = main && main.temp;
+    const temp = main && main.temp;
   
     const weather = {
-        temperature: {
-            F: `${Math.round(temperature)}°F`,
-            C: `${Math.round(((temperature - 32) * 5) / 9)}°C`,
+        temp: {
+            F: `${Math.round(temp)}°F`,
+            C: `${Math.round(((temp - 32) * 5) / 9)}°C`,
         },
     };
     console.log(weather);

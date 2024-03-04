@@ -7,13 +7,14 @@ import Main from "../Main/Main";
 import Profile from "../Profile/Profile";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
-import { parseWeatherData, getForecastWeather } from "../../utils/weatherApi";
-import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+import { parseWeatherData, getWeatherForecast } from "../../utils/weatherApi";
+import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
 
 function App() {
-  const [cards, setCards] = useState([]);
+  const [clothingItems, setClothingItems] = useState([]);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
+  const [location, setLocation] =useState("");
   const [temp, setTemp] = useState(0);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F")
 
@@ -30,58 +31,59 @@ function App() {
     setSelectedCard(card);
   };
   
-  const handleRemoveCard = (cardToRemove) => {
-    api
-      .deleteItem(cardToRemove._id)
-      .then(() => {
-        setCards(cards.filter((card) => card !== cardToRemove));
-        console.log("Card removed successfully from server.");
-      })
-      .catch((error) => {
-        console.error("Error removing card from server:", error);
-      });
-  };
-
-  const onAddItem = (values) => {
-    api
-      .addItem(values.name, values.imageUrl, values.weather)
-      .then((response) => {
-        if (response && response._id) {
-          console.log("Item added successfully");
-          handleCloseModal();
-          setCards([...cards, response]);
-        } else {
-          console.error("Invalid response format:", response);
-        }
-      })
-      .catch((error) => {
-        console.error("Error adding item:", error);
-      });
-  };
-
-  const handleToggleSwitchChange = () => {
+  const handleToggleSwitch = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
 
-  useEffect(() => {
+  const handleRemoveCard = () => {
+    api
+      .deleteItems(selectedCard._id)
+      .then(() => {
+        setClothingItems(
+          clothingItems.filter((item) => item._id !== selectedCard._id)
+        );
+        setSelectedCard({});
+        handleCloseModal();
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const handleAddItemSubmit = ({ name, imageUrl, weather }) => {
+    api
+      .addItems({ name, imageUrl, weather })
+      .then((item) => {
+        setClothingItems([item, ...clothingItems]);
+        handleCloseModal();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
+  const getClothingItems = () => {
     api
       .getItems()
-      .then((items) => {
-        console.log("Fetched items:", items);
-        setCards(items);
+      .then((data) => {
+        setClothingItems(data);
       })
-      .catch((error) => {
-        console.error("Error fetching items:", error);
+      .catch((err) => {
+        console.error(err);
       });
-    getForecastWeather()
+  };
+
+  useEffect(() => {
+    getClothingItems();
+  }, []);
+
+  useEffect(() => {
+    getWeatherForecast()
       .then((data) => {
         const temperature = parseWeatherData(data);
-        console.log(temperature);
+        const location = data.name;
+        setLocation(location);
         setTemp(temperature);
       })
-      .catch((error) => {
-        console.error("Error fetching forecast weather:", error);
-      });
+      .catch((err) => console.error(err));
   }, []);
 
 
@@ -89,7 +91,7 @@ function App() {
     <BrowserRouter>
       <div>
         <CurrentTemperatureUnitContext.Provider
-          value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+          value={{ currentTemperatureUnit, handleToggleSwitch }}
         >
           <Header onCreateModal={handleCreateModal} />
           <Switch>
@@ -97,16 +99,14 @@ function App() {
               <Main
                 weatherTemp={temp}
                 onSelectCard={handleSelectedCard}
-                cards={cards}
-                onRemoveCard={handleRemoveCard}
+                clothingItems={clothingItems}
               />
             </Route>
             <Route path="/profile">
               <Profile
                 onCreateModal={handleCreateModal}
-                cards={cards}
+                clothingItems={clothingItems}
                 onSelectCard={handleSelectedCard}
-                onAddItem={onAddItem}
               />
             </Route>
           </Switch>
@@ -115,7 +115,7 @@ function App() {
             <AddItemModal
               handleCloseModal={handleCloseModal}
               isOpen={activeModal === "create"}
-              onAddItem={onAddItem}
+              onAddItem={handleAddItemSubmit}
             />
           )}
           {activeModal === "preview" && (

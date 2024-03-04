@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import WeatherCard from "../WeatherCard/WeatherCard";
 
-const AddItemModal = ({ handleCloseModal, handleAddItemSubmit, isOpen }) => {
+const AddItemModal = ({ isOpen, onClose, onAddItem }) => {
     const [name, setName ] = useState("");
     const [imageUrl, setUrl] = useState("");
     const [weather, setWeather] = useState("");
@@ -20,7 +21,7 @@ const AddItemModal = ({ handleCloseModal, handleAddItemSubmit, isOpen }) => {
 
     function handleSubmit(e) {
         e.preventDefault();
-        handleAddItemSubmit({ name, imageUrl, weather });
+        onAddItem({ name, imageUrl, weather });
     }
 
     useEffect(() => {
@@ -33,10 +34,10 @@ const AddItemModal = ({ handleCloseModal, handleAddItemSubmit, isOpen }) => {
 
     return (
         <ModalWithForm
-            onClose={handleCloseModal}
+            onClose={onAddItem}
             isOpen={isOpen}
             onSubmit={handleSubmit}
-            className="modal__container"
+            name="create"
             title="New Clothing"
             buttonText="Add Clothing"
         >
