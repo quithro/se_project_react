@@ -1,11 +1,11 @@
-import React from "react";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import "./Header.css";
 import avatar from "../../images/avatar.svg";
 import logo from "../../images/logo.svg";
-import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-import { Link } from "react-router-dom";
 
-const Header = ({ onCreateModal }) => {
+
+const Header = ({ onCreateModal, location }) => {
     const currentDate = new Date().toLocaleString("default", {
         month: "long",
         day: "numeric",

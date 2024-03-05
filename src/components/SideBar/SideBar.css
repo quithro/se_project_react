@@ -1,21 +1,16 @@
 .sidebar {
     display: flex;
-    width: 257px;
-    height: 56px;
-    margin-left: 35px;
-    margin-right: 70px;
-}
-
-.sidebar__avatar {
-    height: 56px;
+    padding: 0;
+  }
+  
+  .sidebar__user-image {
     width: 56px;
-    padding-right: 10px;
-}
-
-.sidebar__name {
-    font-size: 20px;
-    line-height: 25px;
+    height: 56px;
+    border-radius: 50%;
+  }
+  .siderbar__user-name {
     font-weight: 700;
-    height: 25px;
-    width: 230px;
-}
+    line-height: 25px;
+    font-size: 16px;
+    margin-left: 10px;
+  }

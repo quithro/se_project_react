@@ -1,54 +1,67 @@
-.switch {
+.switch__checkbox {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+  }
+  
+  .switch__label {
     display: flex;
     position: relative;
-}
-
-.switch__box {
-    width: 55px;
-    height: 30px;
-    border-radius: 25px;
-    border: 2px solid #000000;
-}
-
-.switch__slider {
-    position: absolute;
-    width: 30px;
-    height: 28px;
-    color: white;
-    border-radius: 20px;
-    background-color: #ffffff;
-    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    width: 50px;
+    height: 27px;
     cursor: pointer;
-}
-
-.switch__slider-F {
-    top: 5px;
-    left: 30px;
-}
-
-.switch__temp-F {
+    background-color: #fff;
+    border-radius: 25px;
+    border: 2px #7e7e7e solid;
+    box-sizing: border-box;
+    transition: 0.2s ease-in-out;
+  }
+  .switch__label_C,
+  .switch__label_F {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     position: absolute;
-    top: -10px;
-    left: 40px;
-    color: #ffffff;
+    margin: 0;
+    width: 25px;
+    height: 25px;
     font-size: 14px;
-}
-
-.switch__slider-C {
-    top: 5px;
-    left: 5px;
-    color: #ffffff;
-}
-
-.switch__temp-C {
+    font-weight: 700;
+    line-height: 17px;
+    transition: 0.3s;
+    mix-blend-mode: difference;
+    z-index: 2;
+    color: white;
+  }
+  
+  .switch__label_C {
+    top: -2x;
+    left: 24px;
+  }
+  
+  .switch__label_F {
+    top: -2px;
+    left: -2px;
+  }
+  .switch__button {
+    content: "";
     position: absolute;
-    top: -10px;
-    left: 15px;
-    color: #ffffff;
-    font-size: 14px;
-}
-
-.switch__active {
-    color: #ffffff;
-    font-size: 16px;
-}
+    top: -2px;
+    left: -2px;
+    width: 26px;
+    height: 26px;
+    border-radius: 20px;
+    transition: 0.2s;
+    background: #000;
+    box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
+  }
+  
+  .switch__checkbox:checked + .switch__button {
+    left: calc(100% + 2px);
+    transform: translateX(-100%);
+  }
+  .switch__label:hover .switch__button {
+    width: 30px;
+  }

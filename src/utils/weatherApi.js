@@ -1,34 +1,21 @@
-//b695b456fd83b55a17c5827f6430eeed API KEY
-//https://api.openweathermap.org/data/2.5/weather?lat=${36.993686171254716}&lon=${-86.4412161845565}&units=imperial&appid=${b695b456fd83b55a17c5827f6430eeed}
-//36.993686171254716, -86.4412161845565
-
-import { processServerResponse } from "./utils";
-
+import { processServerResponse } from "./api";
+const APIKey = "b695b456fd83b55a17c5827f6430eeed";
 const latitude = 36.993686171254716;
 const longitude = -86.4412161845565;
-const APIkey = "b695b456fd83b55a17c5827f6430eeed";
 
-export const getWeatherForecast = () => {
+export const getWeatherForcast = () => {
     const weatherApi = fetch(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIkey}`
-    )
-        .then(processServerResponse)
-        .catch((error) => {
-            console.error("Error fetching weather data:", error);
-        });
-    return weatherApi;
-};
+      ` https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=${APIKey}`
+    ).then(processServerResponse);
   
-export const parseWeatherData = (data) => {
+    return weatherApi;
+  };
+  
+  export const parseWeatherData = (data) => {
     const main = data.main;
     const temp = main && main.temp;
-  
     const weather = {
-        temp: {
-            F: `${Math.round(temp)}°F`,
-            C: `${Math.round(((temp - 32) * 5) / 9)}°C`,
-        },
+      temp: { F: Math.round(temp), C: Math.round(((temp - 32) * 5) / 9) },
     };
-    console.log(weather);
     return weather;
-};
+  };

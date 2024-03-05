@@ -1,14 +1,32 @@
-import React from "react";
+import "./ClothesSection.css";
 import ItemCard from "../ItemCard/ItemCard";
-import "./ClothesSection.css"
 
-const ClothesSection = ({ items = [], onSelectCard }) => (
-    <div className="clothes-section">
-      {items &&
-        items.map((item, index) => (
-          <ItemCard key={index} item={item} onSelectCard={onSelectCard} />
-        ))}
+const ClothesSection = ({ clothingItems, onSelectCard, onCreateModal }) => {
+  return (
+    <div className="clothes">
+      <div className="clothes__header">
+        <h2 className="clothes__header-title">Your items</h2>
+        <button
+          className="clothes__add-button"
+          type="button"
+          onClick={onCreateModal}
+        >
+          + Add new
+        </button>
+      </div>
+      <ul className="clothes__section">
+        {clothingItems.map((item) => {
+          return (
+            <ItemCard
+              item={item}
+              onSelectCard={() => onSelectCard(item)}
+              key={item._id}
+            />
+          );
+        })}
+      </ul>
     </div>
-  )
+  );
+};
 
 export default ClothesSection;

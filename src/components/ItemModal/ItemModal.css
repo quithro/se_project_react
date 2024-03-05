@@ -1,7 +1,18 @@
-.modal__close-item {
+.modal__content {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 10px;
+    position: fixed;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    padding-bottom: 10px;
+  }
+  .modal__close-button {
     position: relative;
-    top: -5px;
-    left: 460px;
+    top: 10px;
+    left: 445px;
     background-image: url("../../images/close-button.svg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -10,35 +21,40 @@
     border: none;
     height: 40px;
     width: 40px;
-}
-
-.modal__close-item:hover {
+  }
+  .modal__close-button:hover {
     cursor: pointer;
-}
-
-.modal__content-item {
-    background-color: #fff;
-    max-width: 496px;
-    border-radius: 20px;
-    padding: 20px 30px 30px 30px;
-}
-
-.modal__image {
-    width: 498px;
-    height: 500px;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
-}
-
-.modal__caption {
-    font-family: "Cabinet Grotesk", Arial, sans-serif;
-    font-size: 16px;
+    opacity: 0.5;
+  }
+  
+  .modal__image {
+    background-size: contain;
+    border-radius: 10px;
+    max-height: 590px;
+    max-width: 445px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .modal__name {
+    margin-left: 30px;
+    margin-bottom: 15px;
+    margin-top: 20px;
+  }
+  .modal__weather {
+    margin-left: 30px;
+    margin-top: 0px;
+  }
+  .modal__delete-button {
     font-weight: 700;
-    line-height: 1.2;
-    background: #ffffff;
-    color: #000000;
-    padding: 30px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
+    position: absolute;
+    bottom: 74px;
+    right: 20px;
+    border: none;
+    background: transparent;
+    color: rgba(255, 77, 0, 1);
+    line-height: 24px;
+    font-size: 20px;
+  }
+  .modal__delete-button:hover {
+    cursor: pointer;
+  }

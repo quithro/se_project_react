@@ -1,43 +1,7 @@
-.modal__input {
-  border: none;
-  border-bottom: 1px solid #000;
-  background: transparent;
-  width: 100%;
-  margin-top: 8px;
-}
-
-.modal__form-field {
-  margin-bottom: 24px;
-}
-
-.modal__select-title {
+.app {
   display: flex;
   flex-direction: column;
-  margin-bottom: 24px;
-  font-family: "Cabinet Grotesk", Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-.modal__select-buttons {
-  display: flex;
-  flex-direction: column;
-  font-family: "Cabinet Grotesk", Arial, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.2;
-  gap: 12px;
-  padding-top: 12px;
-}
-
-.modal__button {
-  margin-right: 5px;
-}
-
-.modal__label {
-  font-family: "Cabinet Grotesk", Arial, sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 1.2;
+  padding-left: 40px;
+  padding-right: 40px;
+  min-height: 100vh;
 }

@@ -26,28 +26,29 @@ function Main({ weatherTemp, onSelectCard, clothingItems }) {
 
     return (
         <main className="main">
-            <WeatherCard 
-                day={true} 
-                type="cloudy" 
-                weatherTemp={weatherTemp} 
-                currentTemp={currentTemp}
-            />
-            <section className="card__section" id="card-section">
-                    Today is {`${currentTemp}°${currentTemperatureUnit}`} / You may want to wear:
-                <ul className="card__items">
-                    {filteredCards.map((item) => {
-                        return (
-                            <ItemCard 
-                                item={item} 
-                                key={item._id} 
-                                onSelectCard={onSelectCard} 
-                            />
-                        );    
-                    })}
-                </ul>
-            </section>
+          <WeatherCard
+            day={false}
+            type="rain"
+            weatherTemp={weatherTemp}
+            currentTemp={currentTemp}
+          />
+          <section className="main__section" id="main-section">
+            Today is {`${currentTemp}°${currentTemperatureUnit}`} / You may want to
+            wear:
+            <ul className="main__items">
+              {filteredCards.map((item) => {
+                return (
+                  <ItemCard
+                    item={item}
+                    onSelectCard={onSelectCard}
+                    key={item._id}
+                  />
+                );
+              })}
+            </ul>
+          </section>
         </main>
-    );
+      );
 }
 
 export default Main;

@@ -4,16 +4,24 @@
     padding: 0px;
     align-items: center;
     min-height: 80px;
-}
-
-.weather__info {
+  }
+  
+  .weather__info {
     position: absolute;
     font-size: 36px;
-    left: 35px;
+    left: 55px;
     color: #fff;
-}
-
-.weather__image {
+  }
+  
+  .weather__image {
     width: 100%;
     min-width: 950px;
-}
+    border-radius: 12px;
+  }
+  
+  .weather__container {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: auto;
+  }

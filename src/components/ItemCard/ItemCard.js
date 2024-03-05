@@ -1,20 +1,19 @@
-import React from "react";
 import "./ItemCard.css";
 
 const ItemCard = ({ item, onSelectCard }) => {
     return (
-        <div>
-            <div>
-            <div className="card__name">{item.name}</div>
-                <img
-                src={item.imageUrl}
-                className="card__image"
-                onClick={() => onSelectCard(item)}
-                lt={item.name}
-            />
-            </div>
+      <li className="card">
+        <div className="card__info">
+          <h5 className="card__name">{item.name}</h5>
         </div>
+        <img
+          className="card__image"
+          src={item.imageUrl}
+          onClick={() => onSelectCard(item)}
+          alt={item.name}
+        />
+      </li>
     );
-};
+  };
 
 export default ItemCard;
